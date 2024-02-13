@@ -2,6 +2,9 @@ import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewSty
 import React from 'react'
 import { Colors } from '../assets';
 
+/**
+ * Props for the Button component.
+ */
 type Props = {
   title: string;
   style?: StyleProp<ViewStyle>;
@@ -9,6 +12,9 @@ type Props = {
   onPress?: () => void;
 }
 
+/**
+ * Button component.
+ */
 export const Button = (props: Props) => {
   const { style, textStyle, onPress, title } = props;
   return (
@@ -20,15 +26,18 @@ export const Button = (props: Props) => {
   )
 }
 
+/**
+ * Styles for the button component.
+ */
 const styles = StyleSheet.create({
   button: {
     justifyContent: 'center',
     flex: 1,
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: Colors.black
-},
-title: {
+  },
+  title: {
     textAlign: 'center',
     fontSize: 28,
-},
+  },
 })
