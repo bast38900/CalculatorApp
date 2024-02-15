@@ -13,6 +13,7 @@ export const Keyboard = (props: Props) => {
   const [displayValue, setDisplayValue] = useState('0');
   const [firstValue, setFirstValue] = useState('');
   const [OperatorValue, setOperator] = useState('');
+  const [calculatedPercentage, setCalculatedPercentage] = useState('');
 
 
   /**
@@ -35,28 +36,62 @@ export const Keyboard = (props: Props) => {
    * Function to handle if equal ('=') are pressed.
    */
   const equalPressed = () => {
-    const a = parseFloat(firstValue)
-    const b = parseFloat(displayValue)
+    if (calculatedPercentage) {
+      setDisplayValue(calculatedPercentage)
+      setCalculatedPercentage('')
+    }
+    else {
+      const a = parseFloat(firstValue)
+      const b = parseFloat(displayValue)
+      let result = ('0');
+  
+      switch (OperatorValue) {
+        case "+":
+          result = (a + b).toString()
+          break;
+        case "-":
+          result = (a - b).toString()
+          break;
+        case "x":
+          result = (a * b).toString()
+          break;
+        case "÷":
+          result = (a / b).toString()
+          break;
+        default:
+          return result;
+      }
+  
+      setDisplayValue(result)
+    }
+  }
+
+  /**
+   * Function to handle if percentage ('%') are pressed.
+   */
+  const percentagePressed = () => {
+    const number = parseFloat(firstValue)
+    const percentage = parseFloat(displayValue) * 0.01
     let result = ('0');
 
     switch (OperatorValue) {
       case "+":
-        result = (a + b).toString()
+        result = (number + (number * (percentage))).toString()
         break;
       case "-":
-        result = (a - b).toString()
+        result = (number -(number * (percentage))).toString()
         break;
       case "x":
-        result = (a * b).toString()
+        result = (number * (percentage)).toString()
         break;
       case "÷":
-        result = (a / b).toString()
+        result = (number / (number * (percentage))).toString()
         break;
       default:
         return result;
     }
 
-    setDisplayValue(result)
+    setCalculatedPercentage(calculatedPercentage + result)
   }
   
   /**
@@ -66,6 +101,7 @@ export const Keyboard = (props: Props) => {
     setDisplayValue('0')
     setFirstValue('')
     setOperator('')
+    setCalculatedPercentage('')
   }
 
   return (
@@ -97,7 +133,8 @@ export const Keyboard = (props: Props) => {
       </View>
       <View style={styles.rowContainer}>
         <Button title='C' style={{backgroundColor: Colors.grey}} textStyle={{color: Colors.white}} onPress={() => clearPressed()}/>
-        <Button title='=' style={{backgroundColor: Colors.orange, flex: 3}} textStyle={{color: Colors.white}} onPress={() => equalPressed()}/>
+        <Button title='=' style={{backgroundColor: Colors.aqua, flex: 2}} textStyle={{color: Colors.white}} onPress={() => equalPressed()}/>
+        <Button title='%' style={{backgroundColor: Colors.orange, flex: 1}} textStyle={{color: Colors.white}} onPress={() => percentagePressed()}/>
       </View>
     </View>
   )
