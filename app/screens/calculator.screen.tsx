@@ -1,14 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { View } from 'react-native'
 import { Keyboard } from '../components/calculator'
 import { sharedStyles } from '../assets/shared.styles'
-
-type Props = {}
 
 /**
  * Calculator screen component.
  */
-export const CalculatorScreen = (props: Props) => {
+export const CalculatorScreen = () => {
   return (
     <View style={sharedStyles.container}>
         <Keyboard/>

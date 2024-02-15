@@ -11,21 +11,61 @@ type Props = {}
  */
 export const Keyboard = (props: Props) => {
   const [displayValue, setDisplayValue] = useState('0');
+  const [firstValue, setFirstValue] = useState('');
+  const [OperatorValue, setOperator] = useState('');
 
+
+  /**
+   * Function to handle if numbers (0 - 9) are pressed.
+   */
   const numberPressed = (number: string) => {
-    console.log(number)
+    setDisplayValue(displayValue === '0' ? number : displayValue + number)
   }
 
-  const operatorPressed = (operator: string) => {
-    console.log(operator)
+  /**
+   * Function to handle if operators ('+', '-', 'x', '÷') are pressed.
+   */
+  const operatorPressed = (OperatorValue: string) => {
+    setFirstValue(displayValue)
+    setDisplayValue('0')
+    setOperator(OperatorValue)
   }
 
-  const clearPressed = () => {
-    console.log("clear")
-  }
-
+  /**
+   * Function to handle if equal ('=') are pressed.
+   */
   const equalPressed = () => {
-    console.log("equal")
+    const a = parseFloat(firstValue)
+    const b = parseFloat(displayValue)
+    let result = ('0');
+
+    switch (OperatorValue) {
+      case "+":
+        result = (a + b).toString()
+        break;
+      case "-":
+        result = (a - b).toString()
+        break;
+      case "x":
+        result = (a * b).toString()
+        break;
+      case "÷":
+        result = (a / b).toString()
+        break;
+      default:
+        return result;
+    }
+
+    setDisplayValue(result)
+  }
+  
+  /**
+   * Function to handle if clear ('C') are pressed.
+   */
+  const clearPressed = () => {
+    setDisplayValue('0')
+    setFirstValue('')
+    setOperator('')
   }
 
   return (
