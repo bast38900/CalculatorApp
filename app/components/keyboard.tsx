@@ -3,6 +3,7 @@ import { Button } from "./button";
 import { Colors } from "../assets/colors";
 import { sharedStyles } from "../assets/shared.styles";
 import { useState } from "react";
+import {add, subtract, multiply, divide } from '../utils/calculate';
 
 type Props = {}
 
@@ -47,16 +48,16 @@ export const Keyboard = (props: Props) => {
   
       switch (OperatorValue) {
         case "+":
-          result = (a + b).toString()
+          result = add(a, b).toString()
           break;
         case "-":
-          result = (a - b).toString()
+          result = subtract(a, b).toString()
           break;
         case "x":
-          result = (a * b).toString()
+          result = multiply(a, b).toString()
           break;
         case "÷":
-          result = (a / b).toString()
+          result = divide(a, b).toString()
           break;
         default:
           return result;
@@ -110,6 +111,12 @@ export const Keyboard = (props: Props) => {
         <Text style={{color: "white", fontSize: 72, fontWeight: 'bold' , alignSelf: 'center'}}>{displayValue}</Text>
       </View>
       <View style={styles.rowContainer}>
+      <Button title='%' style={{backgroundColor: Colors.orange, flex: 1}} textStyle={{color: Colors.white}} onPress={() => percentagePressed()}/>
+      <Button title='%' style={{backgroundColor: Colors.orange, flex: 1}} textStyle={{color: Colors.white}} onPress={() => percentagePressed()}/>
+      <Button title='%' style={{backgroundColor: Colors.orange, flex: 1}} textStyle={{color: Colors.white}} onPress={() => percentagePressed()}/>
+      <Button title='' style={{backgroundColor: Colors.orange, flex: 1}} textStyle={{color: Colors.white}}/>
+      </View>
+      <View style={styles.rowContainer}>
         <Button title='7' style={{backgroundColor: Colors.white}} textStyle={{color: Colors.black}} onPress={() => numberPressed("7")}/>
         <Button title='8' style={{backgroundColor: Colors.white}} textStyle={{color: Colors.black}} onPress={() => numberPressed("8")}/>
         <Button title='9' style={{backgroundColor: Colors.white}} textStyle={{color: Colors.black}} onPress={() => numberPressed("9")}/>
@@ -133,8 +140,7 @@ export const Keyboard = (props: Props) => {
       </View>
       <View style={styles.rowContainer}>
         <Button title='C' style={{backgroundColor: Colors.grey}} textStyle={{color: Colors.white}} onPress={() => clearPressed()}/>
-        <Button title='=' style={{backgroundColor: Colors.aqua, flex: 2}} textStyle={{color: Colors.white}} onPress={() => equalPressed()}/>
-        <Button title='%' style={{backgroundColor: Colors.orange, flex: 1}} textStyle={{color: Colors.white}} onPress={() => percentagePressed()}/>
+        <Button title='=' style={{backgroundColor: Colors.orange, flex: 3}} textStyle={{color: Colors.white}} onPress={() => equalPressed()}/>
       </View>
     </View>
   )

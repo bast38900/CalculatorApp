@@ -6,5 +6,4 @@ export const Colors = {
   orange: '#FFA500',
   white: '#FFFFFF',
   grey: '#808080',
-  aqua: '#00FFFF',
 };
